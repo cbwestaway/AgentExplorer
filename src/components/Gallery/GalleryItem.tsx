@@ -1,24 +1,33 @@
 import * as React from "react";
-import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from "react-router-dom";
 
-interface GalleryItemProps {
-	modelName: string;
-	modelPath: string;
-}
+import { modelConfig } from "./gallery.interfaces";
 
-const GalleryItem = (props: GalleryItemProps) => {
-	const history = useHistory();
 
-	const { modelName, modelPath } = props;
-	return (
-		<Container onClick={() => history.push(modelPath)}>
-			{ /* Image Placeholder */ }
-			<div style={{width: '200px', height: '200px', backgroundColor: 'red'}}></div>
-			<Typography variant="h4">{modelName}</Typography>
-		</Container>
-	)
+const GalleryItem = (props: modelConfig) => {
+  const history = useHistory();
+
+  const { name, path, summary } = props;
+  return (
+    <Grid item xs={4}>
+      <Card variant="outlined" onClick={() => history.push(path)}>
+        <CardHeader
+          title={name}
+        >
+        </CardHeader>
+        <CardContent>
+          <Typography>
+            {summary}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Grid>
+  );
 };
 
 export default GalleryItem;
