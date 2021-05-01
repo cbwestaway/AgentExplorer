@@ -1,9 +1,9 @@
-export interface modelConfig {
+export interface ModelConfig {
   name: string;
   path: string;
   summary: string;
 };
 
-export interface models {
-  models: modelConfig[];
+export interface Models {
+  models: ModelConfig[];
 };

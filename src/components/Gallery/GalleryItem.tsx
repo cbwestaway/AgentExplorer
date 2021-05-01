@@ -6,10 +6,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from "react-router-dom";
 
-import { modelConfig } from "./gallery.interfaces";
+import { ModelConfig } from "./gallery.interfaces";
+import SimulationSnapshot from '../common/SimulationSnapshot';
 
 
-const GalleryItem = (props: modelConfig) => {
+const GalleryItem = (props: ModelConfig) => {
   const history = useHistory();
 
   const { name, path, summary } = props;
@@ -21,6 +22,10 @@ const GalleryItem = (props: modelConfig) => {
         >
         </CardHeader>
         <CardContent>
+          <SimulationSnapshot
+            state={[[3, 1, 3, 4], [2, 2, 1, 4], [3, 2, 4, 1], [1, 2, 3, 4]]}
+            gridColors={['purple', 'gold', 'grey', 'brown']}
+          />
           <Typography>
             {summary}
           </Typography>
