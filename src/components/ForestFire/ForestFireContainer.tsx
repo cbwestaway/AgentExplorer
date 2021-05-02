@@ -3,7 +3,7 @@ import * as React from "react";
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from "@material-ui/core/styles";
 
-import AnimationFrame from "../common/AnimationFrame";
+import SimulationPanel from "../common/SimulationPanel";
 import ForestFireControlPanel from "./ForestFireControlPanel";
 
 
@@ -20,7 +20,7 @@ const ForestFireContainer = () => {
           item
           className={classes.animationPanelGridItem}
         >
-          <AnimationFrame/>
+          <SimulationPanel/>
         </Grid>
         <Grid
           item
