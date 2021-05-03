@@ -9,11 +9,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-enum attr {
-  COLOR,
-  PROPORTION,
-};
-
 export type ForestFireState = {
   name: "Tree" | "Burning" | "Ash";
   color: string;
@@ -29,16 +24,17 @@ interface ForestFireStateDefinitionsProps {
 const ForestFireStateDefinitions = (props: ForestFireStateDefinitionsProps) => {
   const { className, stateDefinitions, setStateDefinitions } = props;
   const classes = useStyles();
-  const onDefinitionChange = (attribute: attr, index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    setStateDefinitions(definitions => {
-      switch (attribute) {
-        case attr.COLOR:
-          definitions[index].color = e.target.value;
-        case attr.PROPORTION:
-          definitions[index].proportion = Number(e.target.value);
-      };
 
-      return definitions;
+  const onColorChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    setStateDefinitions(definitions => {
+      definitions[index].color = e.target.value;
+      return [...definitions];
+    });
+  };
+  const onProportionChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    setStateDefinitions(definitions => {
+      definitions[index].proportion = Number(e.target.value);
+      return [...definitions];
     });
   };
 
@@ -47,7 +43,7 @@ const ForestFireStateDefinitions = (props: ForestFireStateDefinitionsProps) => {
       <Typography className={classes.title}>
         Agent State Definitions
       </Typography>
-      <Table className={classes.table}>
+      <Table className={classes.table} size="small">
         <TableHead>
           <TableRow>
             <TableCell align="center">Color</TableCell>
@@ -62,7 +58,7 @@ const ForestFireStateDefinitions = (props: ForestFireStateDefinitionsProps) => {
                 <Input
                   type="string"
                   value={value.color}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDefinitionChange(attr.COLOR, index, e)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => onColorChange(index, e)}
                 />
               </TableCell>
               <TableCell align="center">{value.name}</TableCell>
@@ -70,7 +66,7 @@ const ForestFireStateDefinitions = (props: ForestFireStateDefinitionsProps) => {
                 <Input
                   type="string"
                   value={value.proportion}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDefinitionChange(attr.PROPORTION, index, e)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => onProportionChange(index, e)}
                 />
               </TableCell>
             </TableRow>

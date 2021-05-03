@@ -14,8 +14,8 @@ import { ForestFireState } from './ForestFireStateDefinitions';
 const DEFAULT_ROWS = 256;
 const DEFAULT_COLUMNS = 256;
 const DEFAULT_NEIGHBORHOOD = 8 as Neighborhood;
-const DEFAULT_P_LIGHTNING = 12.5;
-const DEFAULT_P_REVIVING = 12.5;
+const DEFAULT_P_LIGHTNING = 0.125;
+const DEFAULT_P_REVIVING = 0.125;
 
 const DEFAULT_STATE_DEFINITIONS: ReadonlyArray<ForestFireState> = [
   {
@@ -43,6 +43,7 @@ const ForestFireContainer = () => {
 
   const [stateDefinitions, setStateDefinitions] = useState<ReadonlyArray<ForestFireState>>(DEFAULT_STATE_DEFINITIONS);
   const [state, setState] = useState<ReadonlyArray<ReadonlyArray<number>>>(DEFAULT_STATE);
+
   return (
     <Container>
       <ModelHeader
