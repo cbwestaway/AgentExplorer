@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 export interface SnapshotProps {
@@ -19,12 +19,12 @@ const SimulationSnapshot = (props: SnapshotProps) => {
   const colorClasses: ColorClassMap = {};
   gridColors.forEach((color, ind) => {
     colorClasses[ind] = {
-      backgroundColor: color
+      backgroundColor: color,
     };
   });
-  const colorMap = (makeStyles({
-    ...colorClasses
-  }))();
+  const colorMap = makeStyles({
+    ...colorClasses,
+  })();
 
   const rows = new Array(state.length);
   for (let m = 0; m < state.length; m++) {
@@ -42,42 +42,40 @@ const SimulationSnapshot = (props: SnapshotProps) => {
       <div key={`key_row_${m}`} className={classes.row}>
         {...cells}
       </div>
-    )
+    );
   }
 
   return (
     <div className={classes.container}>
-      <div className={classes.grid}>
-        {...rows}
-      </div>
+      <div className={classes.grid}>{...rows}</div>
     </div>
   );
 };
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    '&::after': {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    "&::after": {
       content: `""`,
-      paddingBottom: '100%'
-    }
+      paddingBottom: "100%",
+    },
   },
   grid: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    border: '1px solid black'
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    border: "1px solid black",
   },
   row: {
-    display: 'flex',
-    flexGrow: 1
+    display: "flex",
+    flexGrow: 1,
   },
   cell: {
     flexGrow: 1,
-    border: '1px solid black'
-  }
+    border: "1px solid black",
+  },
 }));
 
 export default SimulationSnapshot;

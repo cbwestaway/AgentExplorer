@@ -1,2 +1,2 @@
-import ForestFireContainer from './ForestFireContainer';
+import ForestFireContainer from "./ForestFireContainer";
 export default ForestFireContainer;
