@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 
-interface SnapshotProps {
-  state: number[][];
-  gridColors: string[];
+export interface SnapshotProps {
+  readonly state: ReadonlyArray<ReadonlyArray<number>>;
+  readonly gridColors: ReadonlyArray<string>;
 }
 
 interface ColorClassMap {
