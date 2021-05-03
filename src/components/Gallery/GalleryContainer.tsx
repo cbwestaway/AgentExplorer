@@ -7,7 +7,7 @@ import GalleryItem from './GalleryItem';
 const Gallery = (props: Models) => {
   const { models } = props;
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={4}>
       { models.map((model: ModelConfig, i: number) => <GalleryItem key={`key_${i}`} {...model} />) }
     </Grid>
   );
