@@ -1,21 +1,21 @@
 import * as React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
+import SimulationSnapshot, { SnapshotProps } from '../common/SimulationSnapshot';
+
 interface SimulationPanelProps {
-  className?: string;
+  readonly className?: string;
+  readonly snapshotProps: SnapshotProps;
 };
 
 const SimulationPanel = (props: SimulationPanelProps) => {
-  const { className } = props;
+  const { className, snapshotProps } = props;
   const classes = useStyles();
   return (
-    <Card className={className}>
-      <CardContent className={classes.content}>
-        SimulationPanel
-      </CardContent>
-    </Card>
+    <Container className={className}>
+      <SimulationSnapshot {...snapshotProps} />
+    </Container>
   );
 };
 
