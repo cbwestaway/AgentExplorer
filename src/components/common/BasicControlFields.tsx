@@ -1,14 +1,14 @@
-import * as React from 'react';
-import Container from '@material-ui/core/Container';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
+import * as React from "react";
+import Container from "@material-ui/core/Container";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
 
-import Clear from '@material-ui/icons/Clear';
-import { makeStyles } from '@material-ui/core/styles';
+import Clear from "@material-ui/icons/Clear";
+import { makeStyles } from "@material-ui/core/styles";
 
 export type Neighborhood = 4 | 8;
 
@@ -26,7 +26,15 @@ interface BasicControlFieldsProps {
 }
 
 const BasicControlFields = (props: BasicControlFieldsProps) => {
-  const { className, rows, columns, neighborhood, setRows, setColumns, setNeighborhood } = props;
+  const {
+    className,
+    rows,
+    columns,
+    neighborhood,
+    setRows,
+    setColumns,
+    setNeighborhood,
+  } = props;
   const classes = useStyles();
 
   const changeRows = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,13 +51,11 @@ const BasicControlFields = (props: BasicControlFieldsProps) => {
   return (
     <Container className={className}>
       <FormGroup className={classes.formGroup}>
-        <InputLabel className={classes.formLabel}>
-          Grid size
-        </InputLabel>
+        <InputLabel className={classes.formLabel}>Grid size</InputLabel>
         <Input
           required
-          id="rows"
-          type="number"
+          id='rows'
+          type='number'
           inputProps={{
             min: MIN_GRID_SIZE,
             max: MAX_GRID_SIZE,
@@ -61,8 +67,8 @@ const BasicControlFields = (props: BasicControlFieldsProps) => {
         <Clear />
         <Input
           required
-          id="columns"
-          type="number"
+          id='columns'
+          type='number'
           inputProps={{
             min: MIN_GRID_SIZE,
             max: MAX_GRID_SIZE,
@@ -73,16 +79,15 @@ const BasicControlFields = (props: BasicControlFieldsProps) => {
         />
       </FormGroup>
       <FormGroup className={classes.formGroup}>
-        <InputLabel className={classes.formLabel}>
-          Neighborhood
-        </InputLabel>
+        <InputLabel className={classes.formLabel}>Neighborhood</InputLabel>
         <RadioGroup
-          row name="neighborhood"
+          row
+          name='neighborhood'
           value={neighborhood}
           onChange={changeNeighborhood}
         >
-          <FormControlLabel value={4} control={<Radio />} label="4" />
-          <FormControlLabel value={8} control={<Radio />} label="8" />
+          <FormControlLabel value={4} control={<Radio />} label='4' />
+          <FormControlLabel value={8} control={<Radio />} label='8' />
         </RadioGroup>
       </FormGroup>
     </Container>

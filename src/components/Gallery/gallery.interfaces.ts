@@ -3,8 +3,8 @@ export interface ModelConfig {
   path: string;
   summary: string;
   active: boolean;
-};
+}
 
 export interface Models {
   models: ModelConfig[];
-};
+}

@@ -1,14 +1,16 @@
-import * as React from 'react';
-import { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
+import * as React from "react";
+import { useState } from "react";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
 
-import PlayArrow from '@material-ui/icons/PlayArrow';
-import { makeStyles } from '@material-ui/core/styles';
+import PlayArrow from "@material-ui/icons/PlayArrow";
+import { makeStyles } from "@material-ui/core/styles";
 
-import BasicControlFields, { Neighborhood } from '../common/BasicControlFields';
-import ForestFireEvolutionRules from './ForestFireEvolutionRules';
-import ForestFireStateDefinitions, { ForestFireState } from './ForestFireStateDefinitions';
+import BasicControlFields, { Neighborhood } from "../common/BasicControlFields";
+import ForestFireEvolutionRules from "./ForestFireEvolutionRules";
+import ForestFireStateDefinitions, {
+  ForestFireState,
+} from "./ForestFireStateDefinitions";
 
 interface ForestFireControlPanelProps {
   readonly rows: number;
@@ -22,7 +24,9 @@ interface ForestFireControlPanelProps {
   readonly setNeighborhood: React.Dispatch<React.SetStateAction<Neighborhood>>;
   readonly setPLightning: React.Dispatch<React.SetStateAction<number>>;
   readonly setPReviving: React.Dispatch<React.SetStateAction<number>>;
-  readonly setStateDefinitions: React.Dispatch<React.SetStateAction<ReadonlyArray<ForestFireState>>>;
+  readonly setStateDefinitions: React.Dispatch<
+    React.SetStateAction<ReadonlyArray<ForestFireState>>
+  >;
 }
 
 const ForestFireControlPanel = (props: ForestFireControlPanelProps) => {
@@ -51,8 +55,8 @@ const ForestFireControlPanel = (props: ForestFireControlPanelProps) => {
         className={classes.section}
       />
       <Button
-        variant="contained"
-        color="primary"
+        variant='contained'
+        color='primary'
         className={classes.playButton}
       >
         <PlayArrow />
