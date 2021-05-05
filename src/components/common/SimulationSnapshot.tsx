@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cell: {
     flexGrow: 1,
-    border: "1px solid black",
+    // border: "1px solid black",
   },
 }));
 

@@ -61,8 +61,8 @@ const ForestFireEvolutionRulePreview = (
         </TableRow>
       </TableHead>
       <TableBody>
-        {data.map((value) => (
-          <TableRow>
+        {data.map((value, index) => (
+          <TableRow key={index}>
             <TableCell align='center'>{value.currentState}</TableCell>
             <TableCell align='center'>
               {value.nBurningNeighbors ? value.nBurningNeighbors : "-"}

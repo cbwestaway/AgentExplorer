@@ -21,10 +21,11 @@ interface ForestFireStateDefinitionsProps {
   readonly setStateDefinitions: React.Dispatch<
     React.SetStateAction<ReadonlyArray<ForestFireState>>
   >;
+  readonly disabled?: boolean;
 }
 
 const ForestFireStateDefinitions = (props: ForestFireStateDefinitionsProps) => {
-  const { className, stateDefinitions, setStateDefinitions } = props;
+  const { className, stateDefinitions, setStateDefinitions, disabled } = props;
   const classes = useStyles();
 
   const onColorChange = (
@@ -67,16 +68,23 @@ const ForestFireStateDefinitions = (props: ForestFireStateDefinitionsProps) => {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     onColorChange(index, e)
                   }
+                  disabled={disabled}
                 />
               </TableCell>
               <TableCell align='center'>{value.name}</TableCell>
               <TableCell align='center'>
                 <Input
-                  type='string'
+                  type='number'
                   value={value.proportion}
+                  inputProps={{
+                    min: 0,
+                    max: 1,
+                    step: 0.05,
+                  }}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     onProportionChange(index, e)
                   }
+                  disabled={disabled}
                 />
               </TableCell>
             </TableRow>
