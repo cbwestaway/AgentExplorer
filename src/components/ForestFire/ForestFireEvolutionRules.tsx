@@ -14,6 +14,7 @@ interface ForestFireEvolutionRulesProps {
   readonly pReviving: number;
   readonly setPLightning: (pLightning: number) => void;
   readonly setPReviving: (pReviving: number) => void;
+  readonly disabled?: boolean;
 }
 
 const ForestFireEvolutionRules = (props: ForestFireEvolutionRulesProps) => {
@@ -23,6 +24,7 @@ const ForestFireEvolutionRules = (props: ForestFireEvolutionRulesProps) => {
     pReviving,
     setPLightning,
     setPReviving,
+    disabled,
   } = props;
   const classes = useStyles();
 
@@ -52,6 +54,7 @@ const ForestFireEvolutionRules = (props: ForestFireEvolutionRulesProps) => {
           onChange={changePLightning}
           endAdornment={<span>%</span>}
           className={classes.chanceInput}
+          disabled={disabled}
         />
       </FormGroup>
       <FormGroup className={classes.formGroup}>
@@ -70,6 +73,7 @@ const ForestFireEvolutionRules = (props: ForestFireEvolutionRulesProps) => {
           onChange={changePReviving}
           endAdornment={<span>%</span>}
           className={classes.chanceInput}
+          disabled={disabled}
         />
       </FormGroup>
       <ForestFireEvolutionRulePreview

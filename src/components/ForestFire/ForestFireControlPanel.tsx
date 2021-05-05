@@ -1,12 +1,12 @@
 import * as React from "react";
-import { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 
 import PlayArrow from "@material-ui/icons/PlayArrow";
 import { makeStyles } from "@material-ui/core/styles";
 
-import BasicControlFields, { Neighborhood } from "../common/BasicControlFields";
+import BasicControlFields from "../common/BasicControlFields";
+import { Neighborhood } from "../utils/gridHelpers";
 import ForestFireEvolutionRules from "./ForestFireEvolutionRules";
 import ForestFireStateDefinitions, {
   ForestFireState,
@@ -19,6 +19,7 @@ interface ForestFireControlPanelProps {
   readonly pLightning: number;
   readonly pReviving: number;
   readonly stateDefinitions: ReadonlyArray<ForestFireState>;
+  readonly isRunning: boolean;
   readonly setRows: React.Dispatch<React.SetStateAction<number>>;
   readonly setColumns: React.Dispatch<React.SetStateAction<number>>;
   readonly setNeighborhood: React.Dispatch<React.SetStateAction<Neighborhood>>;
@@ -27,6 +28,7 @@ interface ForestFireControlPanelProps {
   readonly setStateDefinitions: React.Dispatch<
     React.SetStateAction<ReadonlyArray<ForestFireState>>
   >;
+  readonly startSimulation: () => void;
 }
 
 const ForestFireControlPanel = (props: ForestFireControlPanelProps) => {
@@ -41,11 +43,13 @@ const ForestFireControlPanel = (props: ForestFireControlPanelProps) => {
         setRows={props.setRows}
         setColumns={props.setColumns}
         setNeighborhood={props.setNeighborhood}
+        disabled={props.isRunning}
       />
       <ForestFireStateDefinitions
         stateDefinitions={props.stateDefinitions}
         setStateDefinitions={props.setStateDefinitions}
         className={classes.section}
+        disabled={props.isRunning}
       />
       <ForestFireEvolutionRules
         pLightning={props.pLightning}
@@ -53,11 +57,14 @@ const ForestFireControlPanel = (props: ForestFireControlPanelProps) => {
         setPLightning={props.setPLightning}
         setPReviving={props.setPReviving}
         className={classes.section}
+        disabled={props.isRunning}
       />
       <Button
         variant='contained'
         color='primary'
         className={classes.playButton}
+        disabled={props.isRunning}
+        onClick={props.startSimulation}
       >
         <PlayArrow />
         Simulate
