@@ -6,7 +6,7 @@ import PlayArrow from "@material-ui/icons/PlayArrow";
 import { makeStyles } from "@material-ui/core/styles";
 
 import BasicControlFields from "../common/BasicControlFields";
-import { Neighborhood } from "../common/Utils";
+import { Neighborhood } from "../utils/gridHelpers";
 import ForestFireEvolutionRules from "./ForestFireEvolutionRules";
 import ForestFireStateDefinitions, {
   ForestFireState,

@@ -38,7 +38,7 @@ export const getNeighbors = (
 };
 
 export const shuffle = (array: Array<number>) => {
-  var currentIndex = array.length,
+  let currentIndex = array.length,
     temporaryValue,
     randomIndex;
 

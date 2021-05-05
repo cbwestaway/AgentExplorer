@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import ModelHeader from "../common/ModelHeader";
 import SimulationPanel from "../common/SimulationPanel";
-import { Neighborhood, getNeighbors, shuffle } from "../common/Utils";
+import { Neighborhood, getNeighbors, shuffle } from "../utils/gridHelpers";
 import ForestFireControlPanel from "./ForestFireControlPanel";
 import { ForestFireState } from "./ForestFireStateDefinitions";
 

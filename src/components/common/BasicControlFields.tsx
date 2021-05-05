@@ -9,7 +9,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import Clear from "@material-ui/icons/Clear";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Neighborhood } from "./Utils";
+import { Neighborhood } from "../utils/gridHelpers";
 
 const MIN_GRID_SIZE = 3;
 const MAX_GRID_SIZE = 1000;
