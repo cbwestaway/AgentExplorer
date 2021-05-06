@@ -9,6 +9,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
+import ColorPicker from "../common/ColorPicker";
+
 export type ForestFireState = {
   name: "Tree" | "Burning" | "Ash";
   color: string;
@@ -28,12 +30,9 @@ const ForestFireStateDefinitions = (props: ForestFireStateDefinitionsProps) => {
   const { className, stateDefinitions, setStateDefinitions, disabled } = props;
   const classes = useStyles();
 
-  const onColorChange = (
-    index: number,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const onColorChange = (index: number, color: string) => {
     setStateDefinitions((definitions) => {
-      definitions[index].color = e.target.value;
+      definitions[index].color = color;
       return [...definitions];
     });
   };
@@ -62,11 +61,18 @@ const ForestFireStateDefinitions = (props: ForestFireStateDefinitionsProps) => {
           {stateDefinitions.map((value, index) => (
             <TableRow key={index}>
               <TableCell align='center'>
-                <Input
+                {/* <Input
                   type='string'
                   value={value.color}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     onColorChange(index, e)
+                  }
+                  disabled={disabled}
+                /> */}
+                <ColorPicker
+                  selectedColor={value.color}
+                  setSelectedColor={(color: string) =>
+                    onColorChange(index, color)
                   }
                   disabled={disabled}
                 />
