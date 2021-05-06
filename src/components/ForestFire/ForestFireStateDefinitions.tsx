@@ -52,23 +52,15 @@ const ForestFireStateDefinitions = (props: ForestFireStateDefinitionsProps) => {
       <Table className={classes.table} size='small'>
         <TableHead>
           <TableRow>
-            <TableCell align='center'>Color</TableCell>
-            <TableCell align='center'>State</TableCell>
-            <TableCell align='center'>Proportion</TableCell>
+            <TableCell>Color</TableCell>
+            <TableCell>State</TableCell>
+            <TableCell>Proportion</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {stateDefinitions.map((value, index) => (
             <TableRow key={index}>
-              <TableCell align='center'>
-                {/* <Input
-                  type='string'
-                  value={value.color}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    onColorChange(index, e)
-                  }
-                  disabled={disabled}
-                /> */}
+              <TableCell>
                 <ColorPicker
                   selectedColor={value.color}
                   setSelectedColor={(color: string) =>
@@ -77,8 +69,8 @@ const ForestFireStateDefinitions = (props: ForestFireStateDefinitionsProps) => {
                   disabled={disabled}
                 />
               </TableCell>
-              <TableCell align='center'>{value.name}</TableCell>
-              <TableCell align='center'>
+              <TableCell>{value.name}</TableCell>
+              <TableCell>
                 <Input
                   type='number'
                   value={value.proportion}

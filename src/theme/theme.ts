@@ -7,9 +7,6 @@ export const appTheme = createMuiTheme({
     type: "dark",
     primary: {
       main: deepPurple["A100"],
-      // light: "4D598C",
-      // dark: "111732",
-      // contrastText: "F3F2FA",
     },
     text: {
       primary: grey[200],

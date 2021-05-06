@@ -35,7 +35,7 @@ const DEFAULT_STATE_DEFINITIONS: ReadonlyArray<ForestFireState> = [
   },
   {
     name: "Ash",
-    color: "black",
+    color: "blue",
     proportion: 0.05,
   },
 ];
