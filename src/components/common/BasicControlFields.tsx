@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Container from "@material-ui/core/Container";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -9,7 +9,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import Clear from "@material-ui/icons/Clear";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Neighborhood } from "../utils/gridHelpers";
+import { Neighborhood } from "../../utils/gridHelpers";
 
 const MIN_GRID_SIZE = 3;
 const MAX_GRID_SIZE = 1000;

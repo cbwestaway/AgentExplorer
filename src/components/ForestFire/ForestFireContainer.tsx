@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -7,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import ModelHeader from "../common/ModelHeader";
 import SimulationPanel from "../common/SimulationPanel";
-import { Neighborhood, getNeighbors, shuffle } from "../utils/gridHelpers";
+import { Neighborhood, getNeighbors, shuffle } from "../../utils/gridHelpers";
 import ForestFireControlPanel from "./ForestFireControlPanel";
 import { ForestFireState } from "./ForestFireStateDefinitions";
 
@@ -62,53 +61,6 @@ const getInitialState = (
   return state;
 };
 
-const getNextState = (
-  currentState: ReadonlyArray<ReadonlyArray<number>>,
-  pLightning: number,
-  pReviving: number,
-  neighborhood: Neighborhood
-) => {
-  const hasBurningNeighbor = (m: number, n: number) => {
-    const neighbors = getNeighbors(
-      currentState.length,
-      currentState[0].length,
-      m,
-      n,
-      neighborhood
-    );
-    return (
-      neighbors.find((coords) => {
-        const [x, y] = coords;
-        if (currentState[x][y] === AgentState.BURNING) {
-          return true;
-        }
-      }) !== undefined
-    );
-  };
-
-  const nextState = currentState.map((x) => [...x]);
-  for (let m = 0; m < nextState.length; m++) {
-    for (let n = 0; n < nextState[0].length; n++) {
-      switch (nextState[m][n]) {
-        case AgentState.TREE:
-          if (hasBurningNeighbor(m, n) || Math.random() <= pLightning) {
-            nextState[m][n] = AgentState.BURNING;
-          }
-          break;
-        case AgentState.BURNING:
-          nextState[m][n] = AgentState.ASH;
-          break;
-        case AgentState.ASH:
-          if (Math.random() <= pReviving) {
-            nextState[m][n] = AgentState.TREE;
-          }
-          break;
-      }
-    }
-  }
-  return nextState;
-};
-
 const ForestFireContainer = () => {
   const classes = useStyles();
   const [rows, setRows] = useState(DEFAULT_ROWS);
@@ -122,34 +74,63 @@ const ForestFireContainer = () => {
   const [stateDefinitions, setStateDefinitions] = useState<
     ReadonlyArray<ForestFireState>
   >(DEFAULT_STATE_DEFINITIONS);
-  const [isRunning, setIsRunning] = useState<boolean>(false);
-  const [currentIter, setCurrentIter] = useState(0);
   const [state, setState] = useState<ReadonlyArray<ReadonlyArray<number>>>(
     getInitialState(rows, columns, stateDefinitions)
   );
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  const getNextState = useCallback(
+    (currentState: ReadonlyArray<ReadonlyArray<number>>) => {
+      const hasBurningNeighbor = (m: number, n: number) => {
+        const neighbors = getNeighbors(
+          currentState.length,
+          currentState[0].length,
+          m,
+          n,
+          neighborhood
+        );
+        return (
+          neighbors.find((coords) => {
+            const [x, y] = coords;
+            if (currentState[x][y] === AgentState.BURNING) {
+              return true;
+            }
+          }) !== undefined
+        );
+      };
 
-  useEffect(() => {
-    setState(getInitialState(rows, columns, stateDefinitions));
-  }, [stateDefinitions, setState]);
-
-  if (isRunning) {
-    if (currentIter < MAX_ITER) {
-      setCurrentIter((x) => x + 1);
-      setState(getNextState(state, pLightning, pReviving, neighborhood));
-    } else {
-      setIsRunning(false);
-      setCurrentIter(0);
-    }
-  }
+      const nextState = currentState.map((x) => [...x]);
+      for (let m = 0; m < nextState.length; m++) {
+        for (let n = 0; n < nextState[0].length; n++) {
+          switch (nextState[m][n]) {
+            case AgentState.TREE:
+              if (hasBurningNeighbor(m, n) || Math.random() <= pLightning) {
+                nextState[m][n] = AgentState.BURNING;
+              }
+              break;
+            case AgentState.BURNING:
+              nextState[m][n] = AgentState.ASH;
+              break;
+            case AgentState.ASH:
+              if (Math.random() <= pReviving) {
+                nextState[m][n] = AgentState.TREE;
+              }
+              break;
+          }
+        }
+      }
+      return nextState;
+    },
+    [neighborhood, pLightning, pReviving]
+  );
 
   return (
     <Container>
       <ModelHeader
         modelTitle='Forest Fire'
         modelDescription='
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
           nisi ut aliquip ex ea commodo consequat.
           Lorem ipsum dolor sit amet, consectetur adipiscing elit,
           sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -166,10 +147,13 @@ const ForestFireContainer = () => {
       >
         <Grid item xs={7} className={classes.simulationPanelGridItem}>
           <SimulationPanel
+            takeSimStep={getNextState}
             snapshotProps={{
               state,
               gridColors: stateDefinitions.map((v) => v.color),
             }}
+            isRunning={isRunning}
+            setIsRunning={setIsRunning}
           />
         </Grid>
         <Grid item xs={5} className={classes.controlPanelGridItem}>

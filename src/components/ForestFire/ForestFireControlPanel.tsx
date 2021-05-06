@@ -1,12 +1,10 @@
-import * as React from "react";
-import Button from "@material-ui/core/Button";
+import React from "react";
 import Container from "@material-ui/core/Container";
 
-import PlayArrow from "@material-ui/icons/PlayArrow";
 import { makeStyles } from "@material-ui/core/styles";
 
 import BasicControlFields from "../common/BasicControlFields";
-import { Neighborhood } from "../utils/gridHelpers";
+import { Neighborhood } from "../../utils/gridHelpers";
 import ForestFireEvolutionRules from "./ForestFireEvolutionRules";
 import ForestFireStateDefinitions, {
   ForestFireState,
@@ -59,16 +57,6 @@ const ForestFireControlPanel = (props: ForestFireControlPanelProps) => {
         className={classes.section}
         disabled={props.isRunning}
       />
-      <Button
-        variant='contained'
-        color='primary'
-        className={classes.playButton}
-        disabled={props.isRunning}
-        onClick={props.startSimulation}
-      >
-        <PlayArrow />
-        Simulate
-      </Button>
     </Container>
   );
 };
