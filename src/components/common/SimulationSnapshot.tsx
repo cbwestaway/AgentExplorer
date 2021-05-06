@@ -1,8 +1,9 @@
-import * as React from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
+export type simulationState = ReadonlyArray<ReadonlyArray<number>>;
 export interface SnapshotProps {
-  readonly state: ReadonlyArray<ReadonlyArray<number>>;
+  readonly state: simulationState;
   readonly gridColors: ReadonlyArray<string>;
 }
 
