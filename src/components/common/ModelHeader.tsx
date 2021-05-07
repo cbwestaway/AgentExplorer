@@ -14,7 +14,7 @@ const ModelHeader = (props: ModelHeaderProps) => {
   const classes = useStyles();
   return (
     <Container className={`${className} ${classes.root}`}>
-      <Typography variant='h1' className={classes.title}>
+      <Typography variant='h2' className={classes.title}>
         {modelTitle}
       </Typography>
       <Typography className={classes.description}>

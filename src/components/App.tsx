@@ -27,7 +27,7 @@ export const App = () => {
 
 const useStyles = makeStyles((appTheme) => ({
   globalContainer: {
-    marginTop: "75px",
+    marginTop: "15px",
     maxWidth: "1500px",
   },
 }));

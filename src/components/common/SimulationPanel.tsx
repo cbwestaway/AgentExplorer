@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import Container from "@material-ui/core/Container";
+import { makeStyles } from "@material-ui/core/styles";
 
 import SimulationSnapshot, {
   SnapshotProps,
@@ -17,6 +18,8 @@ interface SimulationPanelProps {
 
 const nIter = 100;
 const SimulationPanel = (props: SimulationPanelProps) => {
+  const classes = useStyles();
+
   const {
     className,
     takeSimStep,
@@ -31,10 +34,10 @@ const SimulationPanel = (props: SimulationPanelProps) => {
   >([state]);
   const [snapshot, setSnapshot] = useState<simulationState>(state);
   const [iter, setIter] = useState<number>(0);
-  const [showReset, setShowReset] = useState<boolean>(false);
 
+  let simTimer: null | NodeJS.Timeout = null;
   const advanceOneFrame = (state: simulationState) => {
-    setTimeout(() => {
+    simTimer = setTimeout(() => {
       const newState = takeSimStep(state);
       setStateHistory([...stateHistory, newState]);
       setSnapshot(newState);
@@ -48,13 +51,14 @@ const SimulationPanel = (props: SimulationPanelProps) => {
   };
 
   const pause = () => {
+    clearTimeout(simTimer);
     setIsRunning(false);
-    setShowReset(true);
   };
 
   const reset = () => {
+    pause();
     setSnapshot(stateHistory[0]);
-    setShowReset(false);
+    setIter(0);
   };
 
   useEffect(() => {
@@ -62,16 +66,15 @@ const SimulationPanel = (props: SimulationPanelProps) => {
       advanceOneFrame(snapshot);
     } else if (iter === nIter) {
       setIsRunning(false);
-      setShowReset(true);
     }
   }, [iter, isRunning]);
 
   return (
-    <Container className={className}>
+    <Container className={classes.container}>
       <SimulationSnapshot gridColors={gridColors} state={snapshot} />
       <SimulationControls
+        percentComplete={(iter / nIter) * 100}
         isRunning={isRunning}
-        showReset={showReset}
         play={play}
         pause={pause}
         reset={reset}
@@ -79,5 +82,14 @@ const SimulationPanel = (props: SimulationPanelProps) => {
     </Container>
   );
 };
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    maxWidth: "700px",
+    padding: "10px 10px 0 10px",
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: "2px",
+  },
+}));
 
 export default SimulationPanel;

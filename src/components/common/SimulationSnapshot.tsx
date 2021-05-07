@@ -67,7 +67,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     width: "100%",
-    border: "1px solid black",
+    border: "1px solid",
+    borderColor: theme.palette.background.paper,
+    borderRadius: "2px",
   },
   row: {
     display: "flex",
@@ -75,7 +77,6 @@ const useStyles = makeStyles((theme) => ({
   },
   cell: {
     flexGrow: 1,
-    // border: "1px solid black",
   },
 }));
 
