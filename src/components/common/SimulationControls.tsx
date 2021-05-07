@@ -1,14 +1,15 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import PlayArrow from "@material-ui/icons/PlayArrow";
 import Pause from "@material-ui/icons/Pause";
 import Replay from "@material-ui/icons/Replay";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import { makeStyles } from "@material-ui/core/styles";
 
 interface SimulationControlsProps {
+  percentComplete: number;
   isRunning: boolean;
-  showReset: boolean;
   play: () => void;
   pause: () => void;
   reset: () => void;
@@ -16,49 +17,39 @@ interface SimulationControlsProps {
 
 const SimulationControls = (props: SimulationControlsProps) => {
   const classes = useStyles();
-  const { isRunning, showReset, play, pause, reset } = props;
+  const { percentComplete, isRunning, play, pause, reset } = props;
   return (
-    <Container>
-      <Button
-        variant='contained'
-        color='primary'
-        className={classes.playButton}
-        disabled={isRunning}
-        onClick={play}
-      >
-        <PlayArrow />
-        Play
-      </Button>
-      <Button
-        variant='contained'
-        color='primary'
-        className={classes.playButton}
-        disabled={!isRunning}
-        onClick={pause}
-      >
-        <Pause />
-        Pause
-      </Button>
-      {showReset && (
+    <div className={classes.container}>
+      <LinearProgress variant='determinate' value={percentComplete} />
+      <ButtonGroup variant='text'>
         <Button
-          variant='contained'
           color='primary'
-          className={classes.playButton}
+          className={classes.controlButton}
+          onClick={isRunning ? pause : play}
+        >
+          {isRunning ? <Pause /> : <PlayArrow />}
+          {isRunning ? "Pause" : "Play"}
+        </Button>
+        <Button
+          color='primary'
+          className={classes.controlButton}
           onClick={reset}
         >
           <Replay />
           Reset
         </Button>
-      )}
-    </Container>
+      </ButtonGroup>
+    </div>
   );
 };
 
 const useStyles = makeStyles((theme) => ({
-  playButton: {
-    marginTop: "20px",
+  container: {
+    width: "100%",
+  },
+  controlButton: {
     maxWidth: "200px",
-    marginLeft: "10%",
+    padding: "5px 15px",
   },
 }));
 
