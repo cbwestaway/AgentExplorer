@@ -29,11 +29,11 @@ const ForestFireEvolutionRules = (props: ForestFireEvolutionRulesProps) => {
   const classes = useStyles();
 
   const changePLightning = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPLightning(Number(event.target.value) / 100);
+    setPLightning(Number(Number(event.target.value).toFixed(1)) / 100);
   };
 
   const changePReviving = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPReviving(Number(event.target.value) / 100);
+    setPReviving(Number(Number(event.target.value).toFixed(1)) / 100);
   };
   return (
     <Container className={className}>
@@ -50,7 +50,7 @@ const ForestFireEvolutionRules = (props: ForestFireEvolutionRulesProps) => {
             min: 0,
             max: 100,
           }}
-          value={pLightning * 100}
+          defaultValue={pLightning * 100}
           onChange={changePLightning}
           endAdornment={<span>%</span>}
           className={classes.chanceInput}
@@ -69,7 +69,7 @@ const ForestFireEvolutionRules = (props: ForestFireEvolutionRulesProps) => {
             min: 0,
             max: 100,
           }}
-          value={pReviving * 100}
+          defaultValue={pReviving * 100}
           onChange={changePReviving}
           endAdornment={<span>%</span>}
           className={classes.chanceInput}

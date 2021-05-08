@@ -73,7 +73,7 @@ const ForestFireStateDefinitions = (props: ForestFireStateDefinitionsProps) => {
               <TableCell>
                 <Input
                   type='number'
-                  value={value.proportion}
+                  defaultValue={value.proportion}
                   inputProps={{
                     min: 0,
                     max: 1,
