@@ -35,10 +35,10 @@ const ForestFireEvolutionRulePreview = (
   const classes = useStyles();
 
   const data = [
-    createData("Tree", "0", 0, 1 - pLightning, pLightning),
+    createData("Tree", "0", 0, Number((1 - pLightning).toFixed(1)), pLightning),
     createData("Tree", ">0", 0, 0, 1),
     createData("Burning", null, 1, 0, 0),
-    createData("Ash", null, 1 - pReviving, pReviving, 0),
+    createData("Ash", null, Number((1 - pReviving).toFixed(1)), pReviving, 0),
   ];
 
   return (
